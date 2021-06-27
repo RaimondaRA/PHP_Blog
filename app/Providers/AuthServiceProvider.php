@@ -25,6 +25,12 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define('update', function($user, $post){ //redaguoti galima tik savo papostinta posta
+            return $user->id === $post->user_id;
+        });
+
+        Gate::define('delete', function($user, $post){ //trinti galima tik savo papostinta posta
+            return $user->id === $post->user_id;
+        });
     }
 }
